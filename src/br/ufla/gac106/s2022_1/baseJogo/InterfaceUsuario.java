@@ -17,14 +17,14 @@ public interface InterfaceUsuario
      * 
      * @param mensagem Mensagem a ser exibida para o usuário.
      */
-    public void exibirMensagem(String mensagem);
+    void exibirMensagem(String mensagem);
     
     /**
      * Acrescenta informação à uma mensagem anterior
      * 
      * @param mensagem Informação a ser acrecentada na mensagem anterior
      */
-    public void continuarMensagem(String mensagem);    
+    void continuarMensagem(String mensagem);    
     
     /**
      * Obtém um comando do jogador. Deve ser chamado apenas na classe Analisador.
@@ -45,19 +45,19 @@ public interface InterfaceUsuario
      * 
      * @param ambiente Objeto do novo ambiente atual.
      */
-    public void ambienteAtualMudou(EntidadeGrafica ambiente);
+    void ambienteAtualMudou(EntidadeGrafica ambiente);
     
     /**
      * Informa a Interface do Usuário que o jogador pegou um item (ou similar).
      * 
      * @param item Objeto do item que o usuário pegou.
      */
-    public void jogadorPegouItem(EntidadeGrafica item);
+    void jogadorPegouItem(EntidadeGrafica item);
     
     /**
      * Informa a Interface do Usuário que o jogador não tem mais um item (ou similar).
      * 
      * @param item Objeto do item que o usuário não tem mais.
      */
-    public void jogadorDescartouItem(EntidadeGrafica item);
+    void jogadorDescartouItem(EntidadeGrafica item);
 }
