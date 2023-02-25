@@ -111,14 +111,14 @@ public class Jogo {
             return false;
         }
 
-        String palavraDeComando = comando.getPalavraDeComando();
-        if (palavraDeComando.equals("ajuda")) {
+        ComandoEnum palavraDeComando = ComandoEnum.valueOf(comando.getPalavraDeComando().toUpperCase());
+        if (palavraDeComando == ComandoEnum.AJUDA) {
             imprimirAjuda();
         }
-        else if (palavraDeComando.equals("ir")) {
+        else if (palavraDeComando == ComandoEnum.IR) {
             irParaAmbiente(comando);
         }
-        else if (palavraDeComando.equals("sair")) {
+        else if (palavraDeComando == ComandoEnum.SAIR) {
             querSair = sair(comando);
         }
 
