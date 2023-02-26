@@ -116,7 +116,13 @@ public class Jogo {
             imprimirAjuda();
         }
         else if (palavraDeComando.equals("ir")) {
-            irParaAmbiente(comando);
+            String segundaPalavra = comando.getSegundaPalavra();
+            try {
+                Direcao direcao = Direcao.valueOf(segundaPalavra);
+                irParaAmbiente(direcao);
+            } catch (Exception e) {
+                System.out.println("Direção inválida!");
+            }
         }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
@@ -137,31 +143,28 @@ public class Jogo {
         System.out.println("   ir sair ajuda");
     }
 
+
+    private enum Direcao{
+        norte, leste, sul, oeste;
+    }
+
     /** 
      * Tenta ir em uma direcao. Se existe uma saída para lá entra no novo ambiente, 
      * caso contrário imprime mensagem de erro.
      */
-    private void irParaAmbiente(Comando comando)  {
-        // se não há segunda palavra, não sabemos pra onde ir...
-        if(!comando.temSegundaPalavra()) {            
-            System.out.println("Ir pra onde?");
-            return;
-        }
-
-        String direcao = comando.getSegundaPalavra();
-
+    private void irParaAmbiente(Direcao direcao)  {
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao.equals("norte")) {
+        if(direcao==Direcao.norte) {
             proximoAmbiente = ambienteAtual.saidaNorte;
         }
-        if(direcao.equals("leste")) {
+        if(direcao==Direcao.leste) {
             proximoAmbiente = ambienteAtual.saidaLeste;
         }
-        if(direcao.equals("sul")) {
+        if(direcao==Direcao.sul) {
             proximoAmbiente = ambienteAtual.saidaSul;
         }
-        if(direcao.equals("oeste")) {
+        if(direcao==Direcao.oeste) {
             proximoAmbiente = ambienteAtual.saidaOeste;
         }
 
