@@ -14,9 +14,6 @@ import java.util.HashMap;
 
 public class PalavrasComando {
 
-  // um vetor constante que guarda todas as palavras de comandos válidas
-  //   private static final String[] comandosValidos = { "ir", "sair", "ajuda" };
-
   // Um hashMap que guarda todas as palavras de comandos válidas
   private HashMap<String, ComandoEnum> comandosValidos = new HashMap<String, ComandoEnum>();
 
