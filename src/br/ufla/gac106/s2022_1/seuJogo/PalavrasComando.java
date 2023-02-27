@@ -2,7 +2,7 @@ package br.ufla.gac106.s2022_1.seuJogo;
 
 /**
  * Esta classe é parte da aplicação "World of Zuul".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.  
+ * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
  * 
  * Essa classe guarda uma enumeração de todos os comandos conhecidos do
  * jogo. Ela é usada no reconhecimento de comandos como eles são digitados.
@@ -17,7 +17,7 @@ public class PalavrasComando {
     };
 
     /**
-     * Verifica se uma dada String é uma palavra de comando válida. 
+     * Verifica se uma dada String é uma palavra de comando válida.
      * @return true se a string dada é um comando valido, false se não é.
      */
     public boolean ehComando(String umaString) {

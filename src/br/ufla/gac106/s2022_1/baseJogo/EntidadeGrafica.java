@@ -6,7 +6,7 @@ import java.io.File;
 
 /**
  * Classe abstrata que define uma entidade (ambiente ou item) que possui uma imagem.
- * 
+ *
  * @author Julio César Alves
  * @version 2022-03-22
  */
@@ -14,7 +14,7 @@ public abstract class EntidadeGrafica
 {
     // Atributo que guarda a imagem da entidade
     private BufferedImage imagem;
-    
+
     /**
      * Construtor da classe recebe o caminho do arquivo que contém a imagem.
      * 
@@ -45,7 +45,7 @@ public abstract class EntidadeGrafica
     public BufferedImage getImagem() {
         return imagem;
     }
-    
+
     /**
      * Método abstrato que retorna o nome da entidade (ambiente ou item)
      */

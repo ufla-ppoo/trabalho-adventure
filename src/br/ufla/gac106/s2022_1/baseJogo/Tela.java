@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 /**
  * Classe que cria e exibe uma janela gráfica para Interface com o Usuário em um jogo do tipo Adventure.
- * 
+ *
  * @author Julio César Alves
  */
 public class Tela implements InterfaceUsuario
@@ -34,16 +34,16 @@ public class Tela implements InterfaceUsuario
     private JPanel painelItens;
     // Margem usada nos componentes de texto
     private Insets margem;
-        
+
     // guardam a altura e a largura da janela
     private int larguraJanela, alturaJanela;
-    
+
     // guarda a largura do painel central
     private int larguraPainelCentral;
-    
+
     // comando enviado pelo usuario
     private String comandoEnviado;
-    
+
     // HashMap para guardar uma referência para os componentes de cada item
     private HashMap<String, JComponent> componentesDosItens;
 
@@ -52,62 +52,62 @@ public class Tela implements InterfaceUsuario
      * 
      * 
      */
-    public Tela(String nomeJogo) {        
+    public Tela(String nomeJogo) {
         // define a altura e a largura da janela
         larguraJanela = 800;
-        alturaJanela = 700;        
-        
+        alturaJanela = 700;
+
         // define a largura do painel central (usado para mostrar a imagem do ambiente)
         larguraPainelCentral = 650;
-        
+
         // cria a margem que será usada nos componentes de texto
         margem = new Insets(10,10,10, 10);
-        
+
         // criando a janela principal do jogo
         criarJanela();
-        
+
         // criando o painel superior onde é exibido o nome do jogo
         criarPainelSuperior(nomeJogo);
-        
+
         // criando o painel onde é exibida a imagem do ambiente
         criarPainelAmbiente();
-        
+
         // criando o painel onde são exibidos os itens obtidos pelo jogador
         criarPainelItens();
-        
+
         // criando painel inferior onde são exibidas as mensagens para o jogador e obtidos os comandos digitados por ele
         criarPainelInferior();
-    
+
         // empacota a janela (informa que ela está toda montada)
         janela.pack();
-        
+
         // indica que a janela deve ser exibida no centro da tela
         janela.setLocationRelativeTo(null);
-        
+
         // exibe a janela do jogo
         janela.setVisible(true);
     }
-    
+
     /**
      * Cria a janela do jogo (a aplicação em si).
      * 
      * @param nomeJogo Nome do jogo.
      */
-    private void criarJanela() {        
+    private void criarJanela() {
         // cria e define as caracteristas da janela da aplicação
         janela = new JFrame();
         // define o tamanho da janela
-        janela.setPreferredSize(new Dimension(larguraJanela, alturaJanela)); 
+        janela.setPreferredSize(new Dimension(larguraJanela, alturaJanela));
         // define o título da janela
-        janela.setTitle("Trabalho Prático de GAC111 - DAC (ICET / UFLA)");  
+        janela.setTitle("Trabalho Prático de GAC111 - DAC (ICET / UFLA)");
         // define o tipo de layout da janela
-        janela.setLayout(new BorderLayout());            
+        janela.setLayout(new BorderLayout());
         // impede o usuário de alterar o tamanho da janela
-        janela.setResizable(false);                      
+        janela.setResizable(false);
         // indica que o programa deve ser finalizado ao fechar a janela
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
+
     /**
      * Cria o painel superior que mostra o nome do jogo.
      * 
@@ -117,7 +117,7 @@ public class Tela implements InterfaceUsuario
         // cria o painel do superior e define seu tamanho e layout
         JPanel painelSuperior = new JPanel();
         painelSuperior.setPreferredSize(new Dimension(larguraJanela,50));
-        
+
         // Cria e adiciona um rótulo com a identificação do jogo
         JTextArea tituloJogo = new JTextArea(nomeJogo); 
         tituloJogo.setFont(new Font("Consolas", Font.BOLD, 32));
@@ -125,11 +125,11 @@ public class Tela implements InterfaceUsuario
         tituloJogo.setEditable(false);
         tituloJogo.setBackground(janela.getBackground());
         painelSuperior.add(tituloJogo);
-        
+
         // adiciona o painel superior à janela
         janela.add(painelSuperior, BorderLayout.NORTH);
     }
-    
+
     /**
      * Cria o painel que exibe a imagem do ambiente atual
      */
@@ -138,16 +138,16 @@ public class Tela implements InterfaceUsuario
         painelAmbiente = new JPanel();
         painelAmbiente.setPreferredSize(new Dimension(larguraPainelCentral, 500));
         painelAmbiente.setBorder(BorderFactory.createTitledBorder("Ambiente atual"));
-        
+
         // cria o rótulo que é usado para mostrar a imagem do ambiente e o adiciona no painel.
         // Nesse momento ainda não há nenhuma imagem.
         rotuloImagemAmbiente = new JLabel();
         painelAmbiente.add(rotuloImagemAmbiente);
-        
+
         // adiciona o painel do ambiente à janela
         janela.add(painelAmbiente, BorderLayout.CENTER);
     }
-    
+
     /**
      * Cria o painel que exibe os itens que o jogador possui
      */
@@ -158,7 +158,7 @@ public class Tela implements InterfaceUsuario
         painelItens.setBorder(BorderFactory.createTitledBorder("Jogador possui"));
         painelItens.setLayout(new BoxLayout(painelItens, BoxLayout.Y_AXIS));
         janela.add(painelItens, BorderLayout.EAST);
-        
+
         // cria o hashMap usado para guardar os componentes de itens no painel
         componentesDosItens = new HashMap<>();
     }
@@ -170,17 +170,17 @@ public class Tela implements InterfaceUsuario
         // cria o painel inferior
         JPanel painelInferior = new JPanel();
         painelInferior.setPreferredSize(new Dimension(larguraJanela,200));
-        
+
         // cria o subpainel de mensagens e o adiciona ao painel inferior
         criarSubPainelMensagens(painelInferior);
-        
+
         // cria o subpainel de entrada (comandos) e o adiciona ao painel inferior
         criarSubPainelEntrada(painelInferior);
-        
+
         // adiciona o painel inferior à janela do jogo
         janela.add(painelInferior, BorderLayout.SOUTH);
     }
-    
+
     /**
      * Cria o subpainel usado para exibir as mensagens do jogo
      * 
@@ -190,28 +190,28 @@ public class Tela implements InterfaceUsuario
         // cria o subpainel de mensagens e define seu tamanho
         JPanel painelMensagens = new JPanel();
         painelMensagens.setPreferredSize(new Dimension(larguraJanela,150));
-        
+
         // cria uma área de texto onde são exibidas as mensagens do jogo e define suas características
-        areaMensagens = new JTextArea();                
+        areaMensagens = new JTextArea();
         areaMensagens.setLineWrap(true);      // tem quebra de linha
         areaMensagens.setWrapStyleWord(true); // quebra por palavra 
         areaMensagens.setEditable(false);     // impede edição do texto pelo usuário
         areaMensagens.setMargin(margem);      // define uma margem ao redor do texto
         areaMensagens.setFont(new Font("Consolas", Font.BOLD, 16)); // define fonte e tamanho
         areaMensagens.setBackground(janela.getBackground());        // define cor de fundo
-        
+
         // Cria uma área de rolagem para que a área de texto tenha barra de rolagem, se precisar
         JScrollPane areaMensagensScrollPane = new JScrollPane(areaMensagens);
         areaMensagensScrollPane.setPreferredSize(new Dimension(larguraJanela-20,140));
-        areaMensagensScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);        
-        
+        areaMensagensScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
         // adiciona a área de rolagem ao subpainel de mensagens
         painelMensagens.add(areaMensagensScrollPane);
-        
+
         // adiciona o subpainel de mensagem ao painel passado por parâmetro
         painelPai.add(painelMensagens);
     }
-    
+
     /**
      * Cria o subpainel usado para obter os comandos do jogador
      * 
@@ -221,24 +221,24 @@ public class Tela implements InterfaceUsuario
         // cria o painel de entrada do jogador e define seu tamanho
         JPanel painelEntrada = new JPanel();
         painelEntrada.setPreferredSize(new Dimension(larguraJanela,50));
-        
+
         // cria um rótulo com o texto "Comando: " e o adiciona ao painel
         painelEntrada.add(new JLabel("Comando:"));
-        
+
         // cria um campo de texto onde o usuário digitará os comandos
         campoEntrada = new JTextField();
         campoEntrada.setPreferredSize(new Dimension(600,30));
         campoEntrada.setFont(new Font("Consolas", Font.BOLD, 16)); // define fonte e tamanho
         // adiciona o campo de texto ao painel
         painelEntrada.add(campoEntrada);
-        
+
         // Cria um botão para enviar os comandos e o adiciona ao painel
         JButton botaoComando = new JButton("Enviar");
         painelEntrada.add(botaoComando);
-        
+
         // adiciona o painel de entrada ao painel passado por parâmetro
         painelPai.add(painelEntrada);
-        
+
         // cria um objeto para tratar a ação do campo de texto e do botão,
         // ou seja, define o código que é executado quando o usuário clica no botão 'Enviar"
         // ou quando aperta ENTER dentro da caixa de texto dos comandos.
@@ -251,13 +251,13 @@ public class Tela implements InterfaceUsuario
                 campoEntrada.setText("");
             }
         };
-        
+
         // liga a ação à caixa de texto de comandos
         campoEntrada.addActionListener(acaoEnviarComando);
         // liga a ação ao clique no botão "Enviar"
         botaoComando.addActionListener(acaoEnviarComando);
     }
-        
+
     /**
      * Exibe uma nova mensagem para o jogador
      * 
@@ -268,15 +268,15 @@ public class Tela implements InterfaceUsuario
     @Override
     public void exibirMensagem(String mensagem) {
         // substitui o texto da área de mensagens com a nova mensagem recebida
-        areaMensagens.setText(mensagem); 
+        areaMensagens.setText(mensagem);
 
         // trata o redesenho da área de mensagens na janela
         repaintAreaMensagens();
     }
-        
+
     /**
      * Acrescenta informação à uma mensagem anterior
-     * 
+     *
      * @param mensagem Informação a ser acrecentada na mensagem anterior
      */
     @Override
@@ -287,7 +287,7 @@ public class Tela implements InterfaceUsuario
         // trata o redesenho da área de mensagens na janela
         repaintAreaMensagens();
     }
-    
+
     /**
      * Redesenha a área de mensagens e posiciona o cursor ao final do texto
      */
@@ -297,10 +297,10 @@ public class Tela implements InterfaceUsuario
         // posiciona o cursor ao final do texto
         areaMensagens.setCaretPosition(areaMensagens.getDocument().getLength());
     }
-        
+
     /**
      * Obtém um comando do jogador.
-     * 
+     *
      * O código abaixo tem o efeito da tela ficar aguardando o jogador digitar um comando 
      * e apertar ENTER ou clicar em enviar.
      */
@@ -314,20 +314,20 @@ public class Tela implements InterfaceUsuario
             }
             catch (Exception e) {}
         }
-        
+
         // Essa linha só é executada depois que o usuário digitou um comando.
         // Ele é então guardado em uma variável auxiliar para ser retornado.
         String comando = comandoEnviado;
-        
+
         // E o atributo da classe volta para null para depois tratar o próximo comando.
         comandoEnviado = null;
-        
+
         // O método retorna o comando digitado pelo usuário
         return comando;
     }
-    
+
     /**
-     * Obtém uma informação do usuário como String. 
+     * Obtém uma informação do usuário como String.
      * 
      * Obs.: não deve ser usado para comandos. No caso de comandos use 'obterComando'.
      * 
@@ -337,7 +337,7 @@ public class Tela implements InterfaceUsuario
     public String obterInformacao(String instrucao) {
         return JOptionPane.showInputDialog(instrucao);
     }
-    
+
     /**
      * Informa a Interface do Usuário que o jogador mudou de ambiente.
      * 
@@ -349,7 +349,7 @@ public class Tela implements InterfaceUsuario
     public void ambienteAtualMudou(EntidadeGrafica ambiente) {
         // obtém a imagem do ambiente
         BufferedImage imagem = ambiente.getImagem();
-        
+
         // trata o rótulo que exibe a imagem do item
         if (imagem != null) {
             // muda a imagem do ambiente atual (redimensionando para o tamanho padrão de imagens de ambiente)
@@ -366,12 +366,12 @@ public class Tela implements InterfaceUsuario
         painelAmbiente.revalidate();
         painelAmbiente.repaint();
     }
-    
+
     /**
      * Informa a Interface do Usuário que o jogador pegou um item (ou similar).
-     * 
+     *
      * Tem o efeito de mostrar o item na barra lateral do jogo.
-     * 
+     *
      * @param item Objeto do item que o usuário pegou.
      */
     @Override
@@ -379,21 +379,21 @@ public class Tela implements InterfaceUsuario
         // Obtém a quantidade desse item já existente no painel
         int quantidade = quantidadeDoItemNoPainel(item);
 
-        // Se o item ainda não existia no painel de itens        
+        // Se o item ainda não existia no painel de itens
         if (quantidade == 0) {
             // cria um rótulo com o nome do item
             JLabel rotuloNomeItem = new JLabel(item.getNome());
             // adiciona o rótulo no painel de itens
             adicionarComponenteDeItem(rotuloNomeItem, item.getNome());
-            
+
             // obtém a imagem do item
             BufferedImage imagem = item.getImagem();
-            
+
             // trata o rótulo que exibe a imagem do item
             JLabel rotuloImagemItem;
             if (imagem != null) {
                 // cria um rótulo com a imagem do item (redimensionando para o tamanho padrão de imagens de itens)
-                rotuloImagemItem = new JLabel(new ImageIcon(redimensionarImagem(imagem, false)));            
+                rotuloImagemItem = new JLabel(new ImageIcon(redimensionarImagem(imagem, false)));
             }
             else {
                 // se a imagem não foi carregada informa isso na tela
@@ -409,13 +409,13 @@ public class Tela implements InterfaceUsuario
             if (quantidade == 1) {
                 rotuloNomeItem.setText(rotuloNomeItem.getText()+ " (x2)");
             }
-            else { // se tinha mais de um, então é necessário atualizar o número                
-                rotuloNomeItem.setText(rotuloNomeItem.getText().substring(0, 
+            else { // se tinha mais de um, então é necessário atualizar o número
+                rotuloNomeItem.setText(rotuloNomeItem.getText().substring(0,
                                             rotuloNomeItem.getText().lastIndexOf("(")) + 
                                             "(x" + (quantidade+1) + ")");
             }
         }
-                
+
         // força o redesenho do painel que tem a imagem do item
         painelItens.revalidate();
         painelItens.repaint();
@@ -430,10 +430,10 @@ public class Tela implements InterfaceUsuario
         // Tenta obter o rótulo do item (existirá se o item já existir no painel de itens)
         JComponent rotuloItem = componentesDosItens.get(item.getNome());
 
-        // Se o item ainda não existia no painel de itens        
+        // Se o item ainda não existia no painel de itens
         if (rotuloItem == null) {
             return 0;
-        }        
+        }
         else { // se o item já existia no painel de itens
             JLabel rotuloNomeItem = (JLabel)rotuloItem;
             // se o rótulo tem o mesmo nome do item é porque tem apenas um
@@ -450,9 +450,9 @@ public class Tela implements InterfaceUsuario
     
     /**
      * Informa a Interface do Usuário que o jogador não tem mais um item (ou similar).
-     * 
+     *
      * Tem o efeito de não mostrar mais o item na barra lateral do jogo.
-     * 
+     *
      * @param item Objeto do item que o usuário não tem mais.
      */
     @Override
@@ -466,39 +466,39 @@ public class Tela implements InterfaceUsuario
             removerComponenteDeItem(item.getNome());
             removerComponenteDeItem(item.getNome()+"_img");
         } else { // Se existiam mais de 1 desse item
-
+            
             JLabel rotuloNomeItem = (JLabel)componentesDosItens.get(item.getNome());
             // Se existiam 2 desse item no painel
-            if (quantidade == 2 ) {                 
+            if (quantidade == 2 ) { 
                 rotuloNomeItem.setText(item.getNome());
             }
             else { // se existiam mais desse item
                 rotuloNomeItem.setText(rotuloNomeItem.getText().substring(0, 
-                                            rotuloNomeItem.getText().lastIndexOf("(")) + 
+                                            rotuloNomeItem.getText().lastIndexOf("(")) +
                                             "(x" + (quantidade-1) + ")");
             }
-        }        
-       
+        }
+
         // força o redesenho do painel que tem a imagem do item
         painelItens.revalidate();
         painelItens.repaint();
     }
-    
-    
+
+
     /**
      * Adiciona um componente de um item no painel de itens.
      * Adiciona também em um HashMap para que depois seja possível obter o item pelo nome.
-     * 
+     *
      * @param componente Componente do item.
      * @param nome Nome a ser utilizado para o componente.
-     */    
+     */
     private void adicionarComponenteDeItem(JComponent componente, String nome) {
         componente.setName(nome);
         componente.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         componentesDosItens.put(nome, componente);
         painelItens.add(componente);
     }
-    
+
     /**
      * Remove um componente de um item do painel de itens.
      * Remove também de um HashMap usado para encontrar o componente.
@@ -509,13 +509,13 @@ public class Tela implements InterfaceUsuario
         painelItens.remove(componentesDosItens.get(nome));
         componentesDosItens.remove(nome);
     }
-    
+
     /**
      * Redimensiona uma imagem passada em um tamanho padrão (grande ou pequeno).
-     * 
+     *
      * Tamanho grande (600 x 450 pixels) é usado para ambientes e
      * tamanho pequeno (100 x 100 pixels) é usado para itens.
-     * 
+     *
      * @param imagem Imagem que terá seu tamanho redimensionado.
      * @param grande Indica se é para redimensionar para tamanho grande (true) ou tamanho pequeno (false)
      */
@@ -527,7 +527,7 @@ public class Tela implements InterfaceUsuario
             largura = 100;
             altura = 100;
         }
-        
+
         // redimenciona a imagem e a retorna
         return imagem.getScaledInstance(largura, altura, Image.SCALE_DEFAULT);
     }
