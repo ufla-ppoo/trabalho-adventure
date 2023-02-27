@@ -4,13 +4,13 @@ package br.ufla.gac106.s2022_1.seuJogo;
  * Essa é a classe principal da aplicacao "World of Zull".
  * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
  * 
- * Usuários podem caminhar em um cenário. E é tudo! Ele realmente precisa ser 
+ * Usuários podem caminhar em um cenário. E é tudo! Ele realmente precisa ser
  * estendido para fazer algo interessante!
  * 
  * Para jogar esse jogo, crie uma instancia dessa classe e chame o método "jogar".
  * 
- * Essa classe principal cria e inicializa todas as outras: ela cria os ambientes, 
- * cria o analisador e começa o jogo. Ela também avalia e  executa os comandos que 
+ * Essa classe principal cria e inicializa todas as outras: ela cria os ambientes,
+ * cria o analisador e começa o jogo. Ela também avalia e  executa os comandos que
  * o analisador retorna.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
@@ -21,7 +21,7 @@ public class Jogo {
     private Analisador analisador;
     // ambiente onde se encontra o jogador
     private Ambiente ambienteAtual;
-        
+
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
@@ -35,14 +35,14 @@ public class Jogo {
      */
     private void criarAmbientes() {
         Ambiente reitoria, pavilhao, cantina, departamento, laboratorio;
-      
+
         // cria os ambientes
         reitoria = new Ambiente("em um espaço aberto, gramado, em frente à reitoria");
         pavilhao = new Ambiente("no pavilhao de aulas");
         cantina = new Ambiente("na cantina da universidade");
         departamento = new Ambiente("no departamento de computacao");
         laboratorio = new Ambiente("na laboratorio de aulas de programacao");
-        
+
         // inicializa as saidas dos ambientes
         reitoria.ajustarSaidas(null, pavilhao, departamento, cantina);
         pavilhao.ajustarSaidas(null, null, null, reitoria);
@@ -59,9 +59,9 @@ public class Jogo {
     public void jogar()  {
         imprimirBoasVindas();
 
-        // Entra no loop de comando principal. Aqui nós repetidamente lemos comandos e 
+        // Entra no loop de comando principal. Aqui nós repetidamente lemos comandos e
         // os executamos até o jogo terminar.
-                
+
         boolean terminado = false;
         while (! terminado) {
             Comando comando = analisador.pegarComando();
@@ -79,9 +79,9 @@ public class Jogo {
         System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
-        
+
         System.out.println("Voce esta " + ambienteAtual.getDescricao());
-    
+
         System.out.print("Saidas: ");
         if(ambienteAtual.saidaNorte != null) {
             System.out.print("norte ");
@@ -116,13 +116,7 @@ public class Jogo {
             imprimirAjuda();
         }
         else if (palavraDeComando.equals("ir")) {
-            String segundaPalavra = comando.getSegundaPalavra();
-            try {
-                Direcao direcao = Direcao.valueOf(segundaPalavra);
-                irParaAmbiente(direcao);
-            } catch (Exception e) {
-                System.out.println("Direção inválida!");
-            }
+            irParaAmbiente(comando);
         }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
@@ -143,28 +137,31 @@ public class Jogo {
         System.out.println("   ir sair ajuda");
     }
 
-
-    private enum Direcao{
-        norte, leste, sul, oeste;
-    }
-
     /** 
-     * Tenta ir em uma direcao. Se existe uma saída para lá entra no novo ambiente, 
+     * Tenta ir em uma direcao. Se existe uma saída para lá entra no novo ambiente,
      * caso contrário imprime mensagem de erro.
      */
-    private void irParaAmbiente(Direcao direcao)  {
+    private void irParaAmbiente(Comando comando)  {
+        // se não há segunda palavra, não sabemos pra onde ir...
+        if(!comando.temSegundaPalavra()) {
+            System.out.println("Ir pra onde?");
+            return;
+        }
+
+        String direcao = comando.getSegundaPalavra();
+
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao==Direcao.norte) {
+        if(direcao.equals("norte")) {
             proximoAmbiente = ambienteAtual.saidaNorte;
         }
-        if(direcao==Direcao.leste) {
+        if(direcao.equals("leste")) {
             proximoAmbiente = ambienteAtual.saidaLeste;
         }
-        if(direcao==Direcao.sul) {
+        if(direcao.equals("sul")) {
             proximoAmbiente = ambienteAtual.saidaSul;
         }
-        if(direcao==Direcao.oeste) {
+        if(direcao.equals("oeste")) {
             proximoAmbiente = ambienteAtual.saidaOeste;
         }
 
@@ -194,7 +191,7 @@ public class Jogo {
     }
 
     /** 
-     * "Sair" foi digitado. Verifica o resto do comando pra ver se nós queremos 
+     * "Sair" foi digitado. Verifica o resto do comando pra ver se nós queremos
      * realmente sair do jogo.
      * @return true, se este comando sai do jogo, false, caso contrário.
      */

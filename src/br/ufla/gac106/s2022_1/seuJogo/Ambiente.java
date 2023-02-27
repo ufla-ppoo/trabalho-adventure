@@ -3,11 +3,11 @@ package br.ufla.gac106.s2022_1.seuJogo;
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
  * Esta classe é parte da aplicação "World of Zuul".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.  
+ * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
  *
- * Um "Ambiente" representa uma localização no cenário do jogo. Ele é conectado aos 
- * outros ambientes através de saídas. As saídas são nomeadas como norte, sul, leste 
- * e oeste. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho, 
+ * Um "Ambiente" representa uma localização no cenário do jogo. Ele é conectado aos
+ * outros ambientes através de saídas. As saídas são nomeadas como norte, sul, leste
+ * e oeste. Para cada direção, o ambiente guarda uma referência para o ambiente vizinho,
  * ou null se não há saída naquela direção.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
@@ -31,7 +31,7 @@ public class Ambiente  {
     }
 
     /**
-     * Define as saídas do ambiente. Cada direção ou leva a um outro ambiente ou é null 
+     * Define as saídas do ambiente. Cada direção ou leva a um outro ambiente ou é null
      * (indicando que não tem nenhuma saída para lá).
      * @param norte A saída norte.
      * @param leste A saída leste.
