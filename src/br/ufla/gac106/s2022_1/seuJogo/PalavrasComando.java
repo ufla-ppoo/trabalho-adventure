@@ -14,26 +14,34 @@ import java.util.HashMap;
 
 public class PalavrasComando {
 
-  // Um hashMap que guarda todas as palavras de comandos válidas
-  private HashMap<String, ComandoEnum> comandosValidos = new HashMap<String, ComandoEnum>();
+	// Um hashMap que guarda todas as palavras de comandos válidas
+	private HashMap<String, PalavraDeComando> comandosValidos = new HashMap<String, PalavraDeComando>();
 
-  /**
-   * Armazena os comandos validos
-   */
-  PalavrasComando() {
-    for (ComandoEnum comando : ComandoEnum.values()) {
-      comandosValidos.put(comando.toString(), comando);
-    }
-  }
+	/**
+	* Armazena os comandos validos
+	*/
+	public PalavrasComando() {
+		for (PalavraDeComando comando : PalavraDeComando.values()) {
+			if (comando != PalavraDeComando.DESCONHECIDA){
+				comandosValidos.put(comando.toString(), comando);
+			}
+		}
+	}
 
-  /**
-   * Verifica se uma dada String é uma palavra de comando válida.
-   * @return true se a string dada é um comando valido, false se não é.
-   */
-  public boolean ehComando(String umaString) {
-    if (comandosValidos.containsKey(umaString)) {
-      return true;
-    }
-    return false;
-  }
+	/**
+	* Verifica se uma dada String é uma palavra de comando válida.
+	* @return true se a string dada é um comando valido, false se não é.
+	*/
+	public boolean ehComando(String umaString) {
+		return comandosValidos.containsKey(umaString);
+	}
+
+	public PalavraDeComando obterPalavraDeComando(String palavraDeComando){
+		if (comandosValidos.containsKey(palavraDeComando)){
+			return comandosValidos.get(palavraDeComando);
+		}
+		else{
+			return PalavraDeComando.DESCONHECIDA;
+		}
+	}
 }
