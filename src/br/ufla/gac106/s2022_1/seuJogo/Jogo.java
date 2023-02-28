@@ -126,7 +126,6 @@ public class Jogo {
         else if (palavraDeComando == PalavraDeComando.SAIR) {
             querSair = sair(comando);
         }
-        else 
 
         return querSair;
     }
