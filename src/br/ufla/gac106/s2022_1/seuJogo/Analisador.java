@@ -61,10 +61,6 @@ public class Analisador {
 
         // Agora verifica se esta palavra é conhecida. Se for, cria um comando com ela.
         // Se não, cria um comando "null" (para comando desconhecido)
-        if (palavrasDeComando.ehComando(palavra1)) {
-            return new Comando(palavra1, palavra2);
-        } else {
-            return new Comando(null, palavra2);
-        }
+        return new Comando(palavrasDeComando.obterPalavraDeComando(palavra1), palavra2);
     }
 }

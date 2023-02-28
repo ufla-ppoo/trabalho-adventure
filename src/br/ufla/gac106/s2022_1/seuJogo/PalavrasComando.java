@@ -1,5 +1,7 @@
 package br.ufla.gac106.s2022_1.seuJogo;
 
+import java.util.HashMap;
+
 /**
  * Esta classe é parte da aplicação "World of Zuul".
  * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
@@ -12,18 +14,34 @@ package br.ufla.gac106.s2022_1.seuJogo;
 
 public class PalavrasComando {
 
-    // um vetor constante que guarda todas as palavras de comandos válidas
-    private static final String[] comandosValidos = { "ir", "sair", "ajuda" };
+	// Um hashMap que guarda todas as palavras de comandos válidas
+	private HashMap<String, PalavraDeComando> comandosValidos = new HashMap<String, PalavraDeComando>();
 
-    /**
-     * Verifica se uma dada String é uma palavra de comando válida.
-     * @return true se a string dada é um comando valido, false se não é.
-     */
-    public boolean ehComando(String umaString) {
-        for (int i = 0; i < comandosValidos.length; i++) {
-            if (comandosValidos[i].equals(umaString)) return true;
-        }
-        // se chegamos aqui, a string não foi encontrada nos comandos.
-        return false;
-    }
+	/**
+	* Armazena os comandos validos
+	*/
+	public PalavrasComando() {
+		for (PalavraDeComando comando : PalavraDeComando.values()) {
+			if (comando != PalavraDeComando.DESCONHECIDA){
+				comandosValidos.put(comando.toString(), comando);
+			}
+		}
+	}
+
+	/**
+	* Verifica se uma dada String é uma palavra de comando válida.
+	* @return true se a string dada é um comando valido, false se não é.
+	*/
+	public boolean ehComando(String umaString) {
+		return comandosValidos.containsKey(umaString);
+	}
+
+	public PalavraDeComando obterPalavraDeComando(String palavraDeComando){
+		if (comandosValidos.containsKey(palavraDeComando)){
+			return comandosValidos.get(palavraDeComando);
+		}
+		else{
+			return PalavraDeComando.DESCONHECIDA;
+		}
+	}
 }

@@ -109,20 +109,24 @@ public class Jogo {
      */
     private boolean processarComando(Comando comando) {
         boolean querSair = false;
-
-        if (comando.ehDesconhecido()) {
+        
+        PalavraDeComando palavraDeComando = comando.getPalavraDeComando();
+        
+        if (palavraDeComando == PalavraDeComando.DESCONHECIDA) {
             System.out.println("Eu nao entendi o que voce disse...");
             return false;
         }
 
-        String palavraDeComando = comando.getPalavraDeComando();
-        if (palavraDeComando.equals("ajuda")) {
+        if (palavraDeComando == PalavraDeComando.AJUDA) {
             imprimirAjuda();
-        } else if (palavraDeComando.equals("ir")) {
+        }
+        else if (palavraDeComando == PalavraDeComando.IR) {
             irParaAmbiente(comando);
-        } else if (palavraDeComando.equals("sair")) {
+        }
+        else if (palavraDeComando == PalavraDeComando.SAIR) {
             querSair = sair(comando);
         }
+        else 
 
         return querSair;
     }

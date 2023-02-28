@@ -21,7 +21,7 @@ package br.ufla.gac106.s2022_1.seuJogo;
 public class Comando {
 
     // primeira palavra que representa o comando
-    private String palavraDeComando;
+    private PalavraDeComando palavraDeComando;
     // segunda palavra que representa um complemento do comando
     private String segundaPalavra;
 
@@ -31,7 +31,7 @@ public class Comando {
      * @param primeiraPalavra A primeira palavra do comando. Null se o comando não foi reconhecido.
      * @param segundaPalavra A segunda palavra do comando.
      */
-    public Comando(String primeiraPalavra, String segundaPalavra) {
+    public Comando(PalavraDeComando primeiraPalavra, String segundaPalavra) {
         palavraDeComando = primeiraPalavra;
         this.segundaPalavra = segundaPalavra;
     }
@@ -41,7 +41,7 @@ public class Comando {
      * Se o comando não foi entendido, o resultado eh null.
      * @return A palavra de comando.
      */
-    public String getPalavraDeComando() {
+    public PalavraDeComando getPalavraDeComando() {
         return palavraDeComando;
     }
 
@@ -56,7 +56,7 @@ public class Comando {
      * @return true se o comando não foi entendido.
      */
     public boolean ehDesconhecido() {
-        return (palavraDeComando == null);
+        return (palavraDeComando == PalavraDeComando.DESCONHECIDA);
     }
 
     /**
