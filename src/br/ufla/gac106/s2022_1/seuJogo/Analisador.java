@@ -16,7 +16,8 @@ import java.util.Scanner;
  *
  * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
  */
-public class Analisador  {
+public class Analisador {
+
     // guarda todas as palavras de comando validas
     private PalavrasComando palavrasDeComando;
     // origem da entrada de comandos
@@ -25,7 +26,7 @@ public class Analisador  {
     /**
      * Cria um analisador para ler do terminal.
      */
-    public Analisador()  {
+    public Analisador() {
         palavrasDeComando = new PalavrasComando();
         entrada = new Scanner(System.in);
     }
@@ -33,7 +34,7 @@ public class Analisador  {
     /**
      * @return O próximo comando do usuario
      */
-    public Comando pegarComando()  {
+    public Comando pegarComando() {
         // guardará uma linha inteira
         String linha;
         // guardará até duas palavras usadas no comando

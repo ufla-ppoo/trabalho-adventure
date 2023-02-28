@@ -17,6 +17,7 @@ package br.ufla.gac106.s2022_1.seuJogo;
  */
 
 public class Jogo {
+
     // analisador de comandos do jogo
     private Analisador analisador;
     // ambiente onde se encontra o jogador
@@ -25,7 +26,7 @@ public class Jogo {
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
-    public Jogo()  {
+    public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
     }
@@ -37,7 +38,8 @@ public class Jogo {
         Ambiente reitoria, pavilhao, cantina, departamento, laboratorio;
 
         // cria os ambientes
-        reitoria = new Ambiente("em um espaço aberto, gramado, em frente à reitoria");
+        reitoria =
+            new Ambiente("em um espaço aberto, gramado, em frente à reitoria");
         pavilhao = new Ambiente("no pavilhao de aulas");
         cantina = new Ambiente("na cantina da universidade");
         departamento = new Ambiente("no departamento de computacao");
@@ -50,20 +52,20 @@ public class Jogo {
         departamento.ajustarSaidas(reitoria, laboratorio, null, null);
         laboratorio.ajustarSaidas(null, null, null, departamento);
 
-        ambienteAtual = reitoria;  // o jogo comeca em frente à reitoria
+        ambienteAtual = reitoria; // o jogo comeca em frente à reitoria
     }
 
     /**
      *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
      */
-    public void jogar()  {
+    public void jogar() {
         imprimirBoasVindas();
 
         // Entra no loop de comando principal. Aqui nós repetidamente lemos comandos e
         // os executamos até o jogo terminar.
 
         boolean terminado = false;
-        while (! terminado) {
+        while (!terminado) {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
         }
@@ -76,23 +78,25 @@ public class Jogo {
     private void imprimirBoasVindas() {
         System.out.println();
         System.out.println("Bem-vindo ao World of Zuul!");
-        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
+        System.out.println(
+            "World of Zuul eh um novo jogo de aventura, incrivelmente chato."
+        );
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
 
         System.out.println("Voce esta " + ambienteAtual.getDescricao());
 
         System.out.print("Saidas: ");
-        if(ambienteAtual.saidaNorte != null) {
+        if (ambienteAtual.saidaNorte != null) {
             System.out.print("norte ");
         }
-        if(ambienteAtual.saidaLeste != null) {
+        if (ambienteAtual.saidaLeste != null) {
             System.out.print("leste ");
         }
-        if(ambienteAtual.saidaSul != null) {
+        if (ambienteAtual.saidaSul != null) {
             System.out.print("sul ");
         }
-        if(ambienteAtual.saidaOeste != null) {
+        if (ambienteAtual.saidaOeste != null) {
             System.out.print("oeste ");
         }
         System.out.println();
@@ -103,10 +107,15 @@ public class Jogo {
      * @param comando O Comando a ser processado.
      * @return true se o comando finaliza o jogo.
      */
-    private boolean processarComando(Comando comando)  {
+    private boolean processarComando(Comando comando) {
         boolean querSair = false;
-
+        
         PalavraDeComando palavraDeComando = comando.getPalavraDeComando();
+        
+        if (palavraDeComando == PalavraDeComando.DESCONHECIDA) {
+            System.out.println("Eu nao entendi o que voce disse...");
+            return false;
+        }
 
         if (palavraDeComando == PalavraDeComando.AJUDA) {
             imprimirAjuda();
@@ -117,9 +126,7 @@ public class Jogo {
         else if (palavraDeComando == PalavraDeComando.SAIR) {
             querSair = sair(comando);
         }
-        else if (palavraDeComando == PalavraDeComando.DESCONHECIDA) {
-            System.out.println("Eu nao entendi o que voce disse...");
-        }
+        else 
 
         return querSair;
     }
@@ -128,8 +135,10 @@ public class Jogo {
      * Exibe informações de ajuda.
      * Aqui nós imprimimos algo bobo e enigmático e a lista de  palavras de comando
      */
-    private void imprimirAjuda()  {
-        System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
+    private void imprimirAjuda() {
+        System.out.println(
+            "Voce esta perdido. Voce esta sozinho. Voce caminha"
+        );
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
@@ -140,9 +149,9 @@ public class Jogo {
      * Tenta ir em uma direcao. Se existe uma saída para lá entra no novo ambiente,
      * caso contrário imprime mensagem de erro.
      */
-    private void irParaAmbiente(Comando comando)  {
+    private void irParaAmbiente(Comando comando) {
         // se não há segunda palavra, não sabemos pra onde ir...
-        if(!comando.temSegundaPalavra()) {
+        if (!comando.temSegundaPalavra()) {
             System.out.println("Ir pra onde?");
             return;
         }
@@ -151,38 +160,37 @@ public class Jogo {
 
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao.equals("norte")) {
+        if (direcao.equals("norte")) {
             proximoAmbiente = ambienteAtual.saidaNorte;
         }
-        if(direcao.equals("leste")) {
+        if (direcao.equals("leste")) {
             proximoAmbiente = ambienteAtual.saidaLeste;
         }
-        if(direcao.equals("sul")) {
+        if (direcao.equals("sul")) {
             proximoAmbiente = ambienteAtual.saidaSul;
         }
-        if(direcao.equals("oeste")) {
+        if (direcao.equals("oeste")) {
             proximoAmbiente = ambienteAtual.saidaOeste;
         }
 
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
-        }
-        else {
+        } else {
             ambienteAtual = proximoAmbiente;
-            
+
             System.out.println("Voce esta " + ambienteAtual.getDescricao());
 
             System.out.print("Saidas: ");
-            if(ambienteAtual.saidaNorte != null) {
+            if (ambienteAtual.saidaNorte != null) {
                 System.out.print("norte ");
             }
-            if(ambienteAtual.saidaLeste != null) {
+            if (ambienteAtual.saidaLeste != null) {
                 System.out.print("leste ");
             }
-            if(ambienteAtual.saidaSul != null) {
+            if (ambienteAtual.saidaSul != null) {
                 System.out.print("sul ");
             }
-            if(ambienteAtual.saidaOeste != null) {
+            if (ambienteAtual.saidaOeste != null) {
                 System.out.print("oeste ");
             }
             System.out.println();
@@ -194,13 +202,12 @@ public class Jogo {
      * realmente sair do jogo.
      * @return true, se este comando sai do jogo, false, caso contrário.
      */
-    private boolean sair(Comando comando)  {
-        if(comando.temSegundaPalavra()) {
+    private boolean sair(Comando comando) {
+        if (comando.temSegundaPalavra()) {
             System.out.println("Sair o que?");
             return false;
-        }
-        else {
-            return true;  // sinaliza que nós realmente queremos sair
+        } else {
+            return true; // sinaliza que nós realmente queremos sair
         }
     }
 }

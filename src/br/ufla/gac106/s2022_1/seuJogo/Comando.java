@@ -19,6 +19,7 @@ package br.ufla.gac106.s2022_1.seuJogo;
  */
 
 public class Comando {
+
     // primeira palavra que representa o comando
     private PalavraDeComando palavraDeComando;
     // segunda palavra que representa um complemento do comando
