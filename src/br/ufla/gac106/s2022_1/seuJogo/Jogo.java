@@ -76,6 +76,14 @@ public class Jogo {
      * Imprime a mensagem de abertura para o jogador.
      */
     private void imprimirBoasVindas() {
+        System.out.println();
+        System.out.println("Bem-vindo ao World of Zuul!");
+        System.out.println(
+            "World of Zuul eh um novo jogo de aventura, incrivelmente chato."
+        );
+        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
+        System.out.println();
+        
         System.out.println("Você está " + ambienteAtual.getDescricao());
 
         System.out.print("Saídas: ");
