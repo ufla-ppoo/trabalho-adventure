@@ -87,17 +87,10 @@ public class Jogo {
         System.out.println("Você está " + ambienteAtual.getDescricao());
 
         System.out.print("Saídas: ");
-        if (ambienteAtual.getSaida(Direcao.NORTE) != null) {
-            System.out.print("norte ");
-        }
-        if (ambienteAtual.getSaida(Direcao.LESTE) != null) {
-            System.out.print("leste ");
-        }
-        if (ambienteAtual.getSaida(Direcao.SUL) != null) {
-            System.out.print("sul ");
-        }
-        if (ambienteAtual.getSaida(Direcao.OESTE) != null) {
-            System.out.print("oeste ");
+        for (Direcao direcao : Direcao.values()) {
+            if (ambienteAtual.getSaida(direcao) != null) {
+                System.out.print(direcao + " ");
+            }
         }
         System.out.println();
     }
