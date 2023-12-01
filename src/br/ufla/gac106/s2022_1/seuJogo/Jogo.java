@@ -83,21 +83,14 @@ public class Jogo {
         );
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
+        
+        System.out.println("Você está " + ambienteAtual.getDescricao());
 
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
-
-        System.out.print("Saidas: ");
-        if (ambienteAtual.saidaNorte != null) {
-            System.out.print("norte ");
-        }
-        if (ambienteAtual.saidaLeste != null) {
-            System.out.print("leste ");
-        }
-        if (ambienteAtual.saidaSul != null) {
-            System.out.print("sul ");
-        }
-        if (ambienteAtual.saidaOeste != null) {
-            System.out.print("oeste ");
+        System.out.print("Saídas: ");
+        for (Direcao direcao : Direcao.values()) {
+            if (ambienteAtual.getSaida(direcao) != null) {
+                System.out.print(direcao + " ");
+            }
         }
         System.out.println();
     }
@@ -149,48 +142,37 @@ public class Jogo {
      * caso contrário imprime mensagem de erro.
      */
     private void irParaAmbiente(Comando comando) {
-        // se não há segunda palavra, não sabemos pra onde ir...
+        // se não há segunda palavra, não sabemos pra onde ir..
         if (!comando.temSegundaPalavra()) {
-            System.out.println("Ir pra onde?");
+            System.out.println("Ir para onde?");
             return;
         }
 
-        String direcao = comando.getSegundaPalavra();
+        String direcaoDigitada = comando.getSegundaPalavra();
+
+        Direcao direcaoSelecionada;
+        try {
+            direcaoSelecionada = Direcao.pelaString(direcaoDigitada);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Direção inválida! Tente novamente.");
+            return;
+        }
+
+        Ambiente proximoAmbiente = ambienteAtual.getSaida(direcaoSelecionada);
 
         // Tenta sair do ambiente atual
-        Ambiente proximoAmbiente = null;
-        if (direcao.equals("norte")) {
-            proximoAmbiente = ambienteAtual.saidaNorte;
-        }
-        if (direcao.equals("leste")) {
-            proximoAmbiente = ambienteAtual.saidaLeste;
-        }
-        if (direcao.equals("sul")) {
-            proximoAmbiente = ambienteAtual.saidaSul;
-        }
-        if (direcao.equals("oeste")) {
-            proximoAmbiente = ambienteAtual.saidaOeste;
-        }
-
         if (proximoAmbiente == null) {
-            System.out.println("Nao ha passagem!");
+            System.out.println("Não há passagem!");
         } else {
             ambienteAtual = proximoAmbiente;
 
-            System.out.println("Voce esta " + ambienteAtual.getDescricao());
+            System.out.println("Você está " + ambienteAtual.getDescricao());
 
-            System.out.print("Saidas: ");
-            if (ambienteAtual.saidaNorte != null) {
-                System.out.print("norte ");
-            }
-            if (ambienteAtual.saidaLeste != null) {
-                System.out.print("leste ");
-            }
-            if (ambienteAtual.saidaSul != null) {
-                System.out.print("sul ");
-            }
-            if (ambienteAtual.saidaOeste != null) {
-                System.out.print("oeste ");
+            System.out.print("Saídas: ");
+            for (Direcao direcao : Direcao.values()) {
+                if (ambienteAtual.getSaida(direcao) != null) {
+                    System.out.print(direcao + " ");
+                }
             }
             System.out.println();
         }

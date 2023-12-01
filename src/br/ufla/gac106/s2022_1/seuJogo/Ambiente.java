@@ -58,4 +58,22 @@ public class Ambiente {
     public String getDescricao() {
         return descricao;
     }
+
+    /**
+     * @return A saída de acordo com a direção
+     */
+    public Ambiente getSaida(Direcao direcao) {
+        switch (direcao) {
+            case NORTE:
+                return saidaNorte;
+            case SUL:
+                return saidaSul;
+            case LESTE:
+                return saidaLeste;
+            case OESTE:
+                return saidaOeste;
+            default:
+                return null;
+        }
+    }
 }
